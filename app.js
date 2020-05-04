@@ -6,6 +6,7 @@ const app = express();
 //DB config
 const db = require("./config/keys").MONGO_URL;
 
+//connect to MongoDB
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected..."))
@@ -14,6 +15,9 @@ mongoose
 //EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs");
+
+//BodyParser
+app.use(express.urlencoded({ extended: false }));
 
 //Routes
 app.use("/", require("./routes/index"));
